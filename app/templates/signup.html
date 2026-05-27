@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | RentWise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}" aria-label="RentWise home">
+            <span class="brand-mark">R</span>
+            <span>RentWise</span>
+        </a>
+
+        <div class="header-actions">
+            <a class="login-button" href="{{ url_for('login') }}">Login</a>
+            <a class="signup-button" href="{{ url_for('index') }}">Home</a>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <section class="auth-card" aria-labelledby="signup-title">
+            <p class="eyebrow">Create account</p>
+            <h1 id="signup-title">Start your rent analysis</h1>
+            <p class="auth-copy">
+                Save your salary, city preference, and recommendations for easier rental planning.
+            </p>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        <div class="flash-wrapper">
+
+            {% for category, message in messages %}
+
+                <div class="flash-message {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+            <form class="auth-form" action="{{ url_for('signup') }}" method="post">
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+
+               <label for="password">Password</label>
+
+                <input 
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Create password"
+                    required
+                >
+
+                <div class="password-rules" id="password-rules">
+
+                    <p id="length-rule">✖ Minimum 8 characters</p>
+
+                    <p id="uppercase-rule">✖ One uppercase letter</p>
+
+                    <p id="lowercase-rule">✖ One lowercase letter</p>
+
+                    <p id="number-rule">✖ One number</p>
+
+                    <p id="special-rule">✖ One special character</p>
+
+                </div>
+
+                <label for="city">Preferred city</label>
+                <input id="city" name="city" type="text" placeholder="Ahmedabad" required>
+
+                <label for="salary">Monthly salary</label>
+                <input id="salary" name="salary" type="number" min="0" step="1000" placeholder="50000" required>
+
+                <button class="primary-button" type="submit">Create account</button>
+            </form>
+
+            <p class="auth-footnote">
+                Already have an account? Login from the top button.
+            </p>
+        </section>
+    </main>
+    <script>
+
+const passwordInput = document.getElementById('password');
+
+const lengthRule = document.getElementById('length-rule');
+const uppercaseRule = document.getElementById('uppercase-rule');
+const lowercaseRule = document.getElementById('lowercase-rule');
+const numberRule = document.getElementById('number-rule');
+const specialRule = document.getElementById('special-rule');
+
+passwordInput.addEventListener('input', () => {
+
+    const password = passwordInput.value;
+
+    // MIN LENGTH
+
+    if(password.length >= 8){
+        lengthRule.classList.add('valid');
+        lengthRule.innerHTML = '✔ Minimum 8 characters';
+    }else{
+        lengthRule.classList.remove('valid');
+        lengthRule.innerHTML = '✖ Minimum 8 characters';
+    }
+
+    // UPPERCASE
+
+    if(/[A-Z]/.test(password)){
+        uppercaseRule.classList.add('valid');
+        uppercaseRule.innerHTML = '✔ One uppercase letter';
+    }else{
+        uppercaseRule.classList.remove('valid');
+        uppercaseRule.innerHTML = '✖ One uppercase letter';
+    }
+
+    // LOWERCASE
+
+    if(/[a-z]/.test(password)){
+        lowercaseRule.classList.add('valid');
+        lowercaseRule.innerHTML = '✔ One lowercase letter';
+    }else{
+        lowercaseRule.classList.remove('valid');
+        lowercaseRule.innerHTML = '✖ One lowercase letter';
+    }
+
+    // NUMBER
+
+    if(/[0-9]/.test(password)){
+        numberRule.classList.add('valid');
+        numberRule.innerHTML = '✔ One number';
+    }else{
+        numberRule.classList.remove('valid');
+        numberRule.innerHTML = '✖ One number';
+    }
+
+    // SPECIAL CHARACTER
+
+    if(/[@$!%*?&]/.test(password)){
+        specialRule.classList.add('valid');
+        specialRule.innerHTML = '✔ One special character';
+    }else{
+        specialRule.classList.remove('valid');
+        specialRule.innerHTML = '✖ One special character';
+    }
+
+});
+
+</script>
+</body>
+</html>

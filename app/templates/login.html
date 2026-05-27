@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | RentWise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}" aria-label="RentWise home">
+            <span class="brand-mark">R</span>
+            <span>RentWise</span>
+        </a>
+
+        <a class="login-button" href="{{ url_for('index') }}">Home</a>
+    </header>
+
+    <main class="auth-page">
+        <section class="auth-card" aria-labelledby="login-title">
+            <p class="eyebrow">Welcome back</p>
+            <h1 id="login-title">Login to continue</h1>
+            <p class="auth-copy">
+                Access your salary-based rental recommendations and saved property preferences.
+            </p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form class="auth-form" action="{{ url_for('login')}}" method="post">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required>
+
+                <button class="primary-button" type="submit">Login</button>
+            </form>
+
+            <p class="auth-footnote">
+                New here? Create an account option can be added next.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

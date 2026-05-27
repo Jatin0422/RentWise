@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings | RentWise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+>
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+
+   <aside class="profile-sidebar" id="profile-sidebar" aria-hidden="true">
+
+    <div class="profile-sidebar-header">
+
+        <span>Profile</span>
+
+        <button class="profile-close" type="button" aria-label="Close user profile">
+            &times;
+        </button>
+
+    </div>
+
+    <!-- PROFILE CARD -->
+
+    <section class="profile-card">
+
+        <div class="profile-avatar">
+            {{ (session.get('user_name') or 'Renter')[:1] | upper }}
+        </div>
+
+        <div class="profile-content">
+
+            <h2>
+                {{ session.get('user_name') or 'Renter' }}
+            </h2>
+
+            <p>
+                {{ session.get('user_email') or 'Signed in user' }}
+            </p>
+
+            <div class="fit-score-pill">
+                Housing Fit Score - {{ session.get('match_score') or '--' }}%
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PERSONALIZATION -->
+
+    <section class="profile-mini-section">
+
+        <span class="widget-eyebrow">
+            Personalization
+        </span>
+
+        <div class="profile-widget-grid">
+
+            <article>
+
+                <span>Monthly salary</span>
+
+                {% if session.get('user_salary') %}
+                    <strong>
+                        Rs. {{ "{:,.0f}".format(session.get('user_salary')|float) }}
+                    </strong>
+                {% else %}
+                    <strong>--</strong>
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>Healthy rent</span>
+
+                {% if session.get('user_salary') %}
+
+                    <strong>
+                        Rs.
+                        {{ "{:,.0f}".format(session.get('user_salary')|float * 0.25) }}
+                        -
+                        {{ "{:,.0f}".format(session.get('user_salary')|float * 0.35) }}
+                    </strong>
+
+                {% else %}
+
+                    <strong>--</strong>
+
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>City</span>
+
+                <strong>
+                    {{ session.get('user_city') or 'Not set' }}
+                </strong>
+
+            </article>
+
+            <article>
+
+                <span>Style</span>
+
+                {% if personality %}
+                    <strong>{{ personality }}</strong>
+                {% else %}
+                    <strong>Not enough data</strong>
+                {% endif %}
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- FINANCIAL STATUS -->
+
+    <section class="profile-mini-section">
+
+        <span class="widget-eyebrow">
+            Financial Analysis
+        </span>
+
+        <div class="profile-widget-grid">
+
+            <article>
+
+                <span>Status</span>
+
+                {% if financial_label %}
+                    <strong>{{ financial_label }}</strong>
+                {% else %}
+                    <strong>Unavailable</strong>
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>Avg Commute</span>
+
+                {% if session.get('commute_time') %}
+                    <strong>{{ session.get('commute_time') }} mins</strong>
+                {% else %}
+                    <strong>--</strong>
+                {% endif %}
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- PREFERENCE TAGS -->
+
+    <section class="profile-preference-strip">
+
+        {% if badges and badges|length > 0 %}
+
+            {% for badge in badges %}
+
+                <span>{{ badge }}</span>
+
+            {% endfor %}
+
+        {% else %}
+
+            <span>No preferences yet</span>
+
+        {% endif %}
+
+    </section>
+
+    <!-- CONTROLS -->
+
+    <section class="profile-controls">
+
+        <a class="profile-logout" href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </section>
+
+</aside>
+    <div class="profile-backdrop" hidden></div>
+
+    <main class="listings-page">
+        <section class="listings-hero">
+            <div>
+                <p class="eyebrow">Detailed listing view</p>
+                <h1>Explore rental listings in {{ selected_city | default("your city") }}.</h1>
+                <p>
+                    Review rent, area, BHK, size, furnishing, tenant type, and income context
+                    for every listing available in the selected city.
+                </p>
+            </div>
+
+            <form class="listing-city-card" action="{{ url_for('listings') }}" method="get">
+                <label for="listing-city">Select city</label>
+                <select id="listing-city" name="city" onchange="this.form.submit()">
+                    {% for city in cities | default([]) %}
+                        <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="area_search" value="{{ area_search | default('') }}">
+                <p>Changing the city reloads the listings for that city.</p>
+            </form>
+        </section>
+
+        <form class="listing-toolbar" action="{{ url_for('listings') }}" method="get" aria-label="Listing controls">
+            <input type="hidden" name="city" value="{{ selected_city }}">
+
+            <label for="listing-search">Search area</label>
+            <input
+                id="listing-search"
+                name="area_search"
+                type="search"
+                value="{{ area_search | default('') }}"
+                placeholder="Search by area name"
+            >
+
+            <label for="listing-sort">Sort by</label>
+            <select id="listing-sort">
+                <option value="default">Default order</option>
+                <option value="rent-low">Rent: low to high</option>
+                <option value="rent-high">Rent: high to low</option>
+                <option value="size-high">Size: high to low</option>
+            </select>
+
+            <button class="primary-button" type="submit">Search</button>
+            <a class="secondary-button" href="{{ url_for('listings', city=selected_city) }}">Reset</a>
+        </form>
+
+        <section class="listing-results" id="listing-results" aria-label="Rental listings">
+            {% for listing in listings | default([]) %}
+                <article
+                    class="listing-card"
+                    data-area="{{ listing.area }}"
+                    data-rent="{{ listing.rent }}"
+                    data-size="{{ listing.size_sqft }}"
+                >
+                    <div class="listing-photo listing-photo-{{ loop.index0 % 3 }}"></div>
+                    <div class="listing-info">
+                        <div>
+                            <span class="fit-label">{{ listing.tenant_type }}</span>
+                            <h2>{{ listing.bhk }} BHK in {{ listing.area }}</h2>
+                            <p>{{ selected_city }} &middot; {{ listing.furnishing }} &middot; {{ listing.size_sqft }} sqft</p>
+                        </div>
+
+                        <dl class="listing-metrics">
+                            <div>
+                                <dt>Monthly rent</dt>
+                                <dd>Rs. {{ "{:,.0f}".format(listing.rent) }}</dd>
+                            </div>
+                            <div>
+                                <dt>Affordability</dt>
+                                <dd>
+                                    {% if listing.affordability_percent is defined %}
+                                        {{ listing.affordability_percent }}%
+                                    {% else %}
+                                        --
+                                    {% endif %}
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Furnishing</dt>
+                                <dd>{{ listing.furnishing }}</dd>
+                            </div>
+                            <div>
+                                <dt>Tenant type</dt>
+                                <dd>{{ listing.tenant_type }}</dd>
+                            </div>
+                        </dl>
+
+                        <a class="listing-detail-button" href="/listing/{{ listing.id | default(loop.index0) }}">View details</a>
+                    </div>
+                </article>
+            {% else %}
+                <div class="empty-state">
+                    <h2>No listings found</h2>
+                    <p>Select another city or search a different area.</p>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer class="dashboard-footer">
+        <div>
+            <strong>RentWise</strong>
+            <span>Detailed rental data for better shortlisting.</span>
+        </div>
+        <span>Compare listings before planning property visits.</span>
+    </footer>
+
+    <script src="{{ url_for('static', filename='profile.js') }}"></script>
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+    <script>
+        const searchInput = document.querySelector("#listing-search");
+        const sortSelect = document.querySelector("#listing-sort");
+        const results = document.querySelector("#listing-results");
+
+        function getCards() {
+            return Array.from(document.querySelectorAll(".listing-card"));
+        }
+
+        function applyListingControls() {
+            const searchValue = searchInput.value.trim().toLowerCase();
+            const sortValue = sortSelect.value;
+            const cards = getCards();
+
+            cards.forEach((card) => {
+                const area = card.dataset.area.toLowerCase();
+                card.hidden = searchValue && !area.includes(searchValue);
+            });
+
+            const sortedCards = cards.sort((a, b) => {
+                const rentA = Number(a.dataset.rent) || 0;
+                const rentB = Number(b.dataset.rent) || 0;
+                const sizeA = Number(a.dataset.size) || 0;
+                const sizeB = Number(b.dataset.size) || 0;
+
+                if (sortValue === "rent-low") return rentA - rentB;
+                if (sortValue === "rent-high") return rentB - rentA;
+                if (sortValue === "size-high") return sizeB - sizeA;
+                return 0;
+            });
+
+            sortedCards.forEach((card) => results.appendChild(card));
+        }
+
+        searchInput.addEventListener("input", applyListingControls);
+        sortSelect.addEventListener("change", applyListingControls);
+    </script>
+</body>
+</html>
+ 

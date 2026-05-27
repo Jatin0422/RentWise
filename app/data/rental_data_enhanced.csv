@@ -1,0 +1,141 @@
+city,area,bhk,rent,avg_income,size_sqft,furnishing,tenant_type,deposit_amount,maintenance_charges,floor_number,parking_available,pets_allowed,nearest_metro_distance_km,nearest_mall_distance_km,nearest_hospital_distance_km,nearest_school_distance_km,nearest_park_distance_km,avg_commute_time_minutes
+Ahmedabad,Bopal,2,57785,231140,1350,Unfurnished,Family,115570,4493,15,No,No,6.48,0.43,2.07,4.45,0.84,73
+Ahmedabad,Bopal,2,38051,114153,1119,Semi,Family,114153,1336,3,No,Yes,0.81,6.74,4.65,4.78,2.4,37
+Ahmedabad,Bopal,3,57057,171171,1197,semi,Bachelor,171171,2843,4,Yes,Yes,4.17,2.03,0.73,4.32,0.97,46
+Ahmedabad,Bopal,1,12318,49272,1405,Furnished,Bachelor,24636,500,0,Yes,Yes,1.79,9.62,0.54,4.07,1.39,56
+Ahmedabad,Satellite,2,17896,53688,1232,Unfurnished,Bachelor,35792,664,7,Yes,Yes,0.95,1.74,4.4,3.31,0.08,85
+Ahmedabad,Satellite,1,34993,174965,683,semi,Bachelor,69986,777,0,Yes,No,11.88,4.32,3.02,2.8,0.26,46
+Ahmedabad,Satellite,1,32391,129564,933,Unfurnished,Family,64782,1832,5,Yes,Yes,4.0,1.13,4.16,0.53,1.21,58
+Ahmedabad,Satellite,3,50776,101552,1265,Semi,Family,152328,2547,6,No,Yes,9.76,9.97,2.67,2.1,1.47,53
+Ahmedabad,Chandkheda,3,59125,118250,1095,Unfurnished,Bachelor,177375,1365,3,Yes,No,3.2,5.17,1.55,1.93,1.82,65
+Ahmedabad,Chandkheda,1,36588,109764,951,Furnished,Family,109764,1343,7,Yes,Yes,8.24,6.08,4.93,1.37,0.91,37
+Ahmedabad,Chandkheda,2,51155,204620,1347,semi,Family,102310,3811,0,Yes,Yes,9.17,0.95,4.82,3.64,2.1,88
+Ahmedabad,Chandkheda,1,9428,28284,1383,Unfurnished,Family,28284,500,0,No,No,7.23,7.57,4.2,2.53,2.59,15
+Ahmedabad,Vastrapur,1,46799,187196,1092,semi,Family,140397,1343,13,Yes,Yes,5.76,2.34,1.71,0.5,2.35,70
+Ahmedabad,Vastrapur,3,49901,249505,1004,Unfurnished,Bachelor,99802,2463,4,Yes,No,5.06,9.01,3.58,1.18,0.17,29
+Ahmedabad,Vastrapur,3,18420,55260,595,Furnished,Family,36840,1458,1,Yes,No,4.32,2.29,2.23,3.45,1.47,87
+Ahmedabad,Vastrapur,3,50796,253980,645,Unfurnished,Bachelor,101592,1754,6,Yes,No,11.17,2.15,0.64,0.47,0.36,11
+Ahmedabad,Navrangpura,3,28082,140410,720,semi,Bachelor,56164,1694,11,Yes,Yes,10.0,0.65,5.51,4.27,0.76,82
+Ahmedabad,Navrangpura,1,56021,224084,1273,Semi,Bachelor,112042,3680,2,No,No,11.59,4.88,0.91,2.53,2.96,46
+Ahmedabad,Navrangpura,2,42905,85810,760,Furnished,Family,85810,1470,8,Yes,Yes,1.67,5.78,5.71,2.45,0.47,29
+Ahmedabad,Navrangpura,3,50756,203024,1313,Furnished,Bachelor,101512,3233,0,Yes,Yes,8.82,0.94,2.73,3.0,1.52,35
+Mumbai,Andheri,1,31116,124464,1337,Unfurnished,Bachelor,93348,1309,0,Yes,Yes,11.27,7.82,1.19,4.14,1.87,38
+Mumbai,Andheri,3,53962,215848,1123,Unfurnished,Family,107924,3126,6,No,No,2.34,4.7,3.3,1.8,2.12,10
+Mumbai,Andheri,2,31441,94323,816,Furnished,Family,62882,1824,6,Yes,Yes,0.98,5.39,5.25,3.42,1.7,44
+Mumbai,Andheri,1,43255,173020,1176,Semi,Bachelor,86510,2256,8,Yes,Yes,8.95,4.58,4.42,2.87,0.08,79
+Mumbai,Bandra,1,59891,119782,1178,semi,Bachelor,119782,1522,10,No,No,6.98,4.19,4.86,1.41,1.01,68
+Mumbai,Bandra,2,28560,114240,963,Furnished,Family,85680,2003,19,No,Yes,10.13,5.73,3.99,4.41,1.58,78
+Mumbai,Bandra,3,10096,20192,768,semi,Bachelor,20192,500,6,No,Yes,1.85,1.81,4.18,4.01,0.31,42
+Mumbai,Bandra,1,11140,44560,1124,Furnished,Family,22280,500,3,No,Yes,9.58,2.06,5.11,3.33,1.08,60
+Mumbai,Dadar,2,12241,61205,1282,Furnished,Family,24482,500,12,Yes,Yes,2.58,8.66,1.57,4.27,0.15,87
+Mumbai,Dadar,2,39598,79196,1506,semi,Family,79196,2196,3,Yes,Yes,2.13,9.48,2.99,4.35,0.28,21
+Mumbai,Dadar,2,50677,101354,530,semi,Family,152031,3074,5,No,Yes,2.14,3.92,1.41,3.57,1.22,29
+Mumbai,Dadar,2,15153,75765,597,Furnished,Family,30306,500,0,Yes,No,9.81,2.93,5.93,4.2,0.44,62
+Mumbai,Powai,2,28603,114412,1276,Semi,Bachelor,57206,1451,0,Yes,Yes,8.05,6.55,5.67,3.52,1.72,52
+Mumbai,Powai,3,24172,96688,720,Furnished,Bachelor,72516,812,18,No,Yes,6.37,4.26,0.33,3.43,2.08,59
+Mumbai,Powai,3,34854,104562,1340,Furnished,Bachelor,104562,2046,13,Yes,No,4.43,0.55,4.26,3.13,2.41,38
+Mumbai,Powai,1,9729,38916,1308,Furnished,Bachelor,29187,500,9,Yes,Yes,10.55,1.81,5.56,3.79,0.64,66
+Mumbai,Borivali,1,43574,130722,1029,semi,Family,87148,2678,4,Yes,No,4.83,7.24,1.17,0.88,0.54,48
+Mumbai,Borivali,1,58445,116890,1278,semi,Family,116890,2525,1,Yes,Yes,9.84,6.69,3.45,4.42,0.36,65
+Mumbai,Borivali,2,29206,87618,1459,Semi,Family,87618,2226,1,Yes,Yes,5.38,0.56,5.5,4.37,1.93,52
+Mumbai,Borivali,3,14879,74395,1067,Unfurnished,Family,29758,500,2,Yes,Yes,4.65,2.45,0.3,0.24,2.13,59
+Pune,Hinjewadi,1,12730,50920,819,Furnished,Family,25460,515,6,Yes,Yes,5.66,2.54,4.21,4.15,0.14,32
+Pune,Hinjewadi,2,55119,275595,1059,semi,Bachelor,110238,1478,10,Yes,Yes,3.76,6.82,1.85,0.73,2.81,53
+Pune,Hinjewadi,3,8373,33492,564,Semi,Bachelor,16746,632,9,Yes,Yes,9.02,0.49,5.55,1.74,0.2,47
+Pune,Hinjewadi,3,27219,108876,1031,Furnished,Bachelor,81657,1977,3,Yes,Yes,6.13,1.31,5.83,3.74,1.65,32
+Pune,Wakad,3,53441,160323,803,Furnished,Family,106882,1896,18,No,Yes,2.94,8.06,5.67,0.89,2.14,54
+Pune,Wakad,3,14035,28070,1504,Furnished,Family,42105,836,10,Yes,Yes,10.81,2.03,2.9,4.11,2.62,61
+Pune,Wakad,2,20132,60396,1021,Unfurnished,Family,40264,1390,7,Yes,Yes,4.73,6.63,5.19,4.18,2.16,89
+Pune,Wakad,3,26797,53594,721,Unfurnished,Bachelor,53594,1429,8,No,Yes,6.61,2.61,5.08,2.59,2.42,59
+Pune,Kothrud,1,40991,81982,1453,Semi,Bachelor,81982,2122,4,Yes,Yes,10.9,1.26,1.98,0.13,1.05,17
+Pune,Kothrud,2,54020,108040,670,Unfurnished,Family,108040,1864,2,No,No,7.57,2.66,4.99,1.51,2.45,10
+Pune,Kothrud,3,14012,56048,816,Unfurnished,Bachelor,42036,500,4,Yes,Yes,1.58,7.31,0.32,3.12,0.29,17
+Pune,Kothrud,3,39849,119547,1509,semi,Family,119547,2942,11,No,No,11.29,8.6,3.62,4.91,2.69,38
+Pune,Baner,1,9224,46120,624,semi,Family,27672,683,0,Yes,No,7.61,8.35,1.46,3.2,1.67,14
+Pune,Baner,2,43287,86574,567,Furnished,Family,129861,2510,1,No,Yes,4.15,4.15,0.81,1.37,2.46,56
+Pune,Baner,2,57814,173442,1382,Unfurnished,Bachelor,115628,2332,0,Yes,No,1.84,6.78,0.55,3.21,1.38,43
+Pune,Baner,2,44240,132720,609,semi,Bachelor,132720,1812,0,No,No,9.57,2.29,4.21,2.75,1.95,74
+Pune,Hadapsar,3,24297,121485,744,Semi,Family,48594,1544,14,Yes,Yes,7.52,3.14,2.11,3.92,1.6,64
+Pune,Hadapsar,1,58025,290125,1042,Unfurnished,Family,116050,4284,9,Yes,Yes,6.49,8.99,4.38,0.62,2.21,52
+Pune,Hadapsar,3,31104,155520,774,Semi,Family,62208,2278,5,No,No,10.75,0.43,0.49,3.83,0.29,83
+Pune,Hadapsar,3,59136,236544,1152,semi,Bachelor,118272,3950,0,Yes,No,9.51,1.13,1.96,2.75,0.23,39
+Delhi,Saket,3,33254,66508,783,Semi,Bachelor,66508,1946,6,Yes,Yes,1.99,2.32,3.28,4.82,0.78,26
+Delhi,Saket,2,47030,141090,577,Unfurnished,Bachelor,94060,1178,5,Yes,Yes,3.88,0.56,4.77,1.78,0.52,35
+Delhi,Saket,2,10503,21006,819,semi,Family,31509,500,1,Yes,Yes,3.13,2.06,1.98,3.2,2.62,17
+Delhi,Saket,3,44339,177356,739,Furnished,Bachelor,88678,3277,5,Yes,Yes,8.98,5.96,3.79,4.67,0.7,56
+Delhi,Rohini,3,57314,286570,793,Furnished,Bachelor,114628,3232,4,Yes,No,0.6,4.39,5.33,0.6,2.93,85
+Delhi,Rohini,2,55973,279865,1131,Furnished,Bachelor,111946,1150,8,No,Yes,6.92,8.96,3.73,4.69,1.04,81
+Delhi,Rohini,1,57661,172983,1378,Furnished,Bachelor,115322,1504,8,Yes,Yes,9.2,8.23,1.47,3.47,0.59,55
+Delhi,Rohini,2,47846,95692,1492,Unfurnished,Family,143538,2862,0,Yes,No,10.55,3.62,0.24,0.43,2.38,77
+Delhi,Dwarka,1,10548,52740,1041,semi,Family,21096,500,4,No,Yes,4.24,2.82,5.23,1.57,1.99,42
+Delhi,Dwarka,1,36318,108954,737,Semi,Bachelor,108954,1077,8,No,Yes,9.89,3.98,0.23,3.57,1.52,10
+Delhi,Dwarka,3,59179,295895,892,semi,Family,177537,3132,6,Yes,No,1.51,6.03,5.26,0.43,1.69,28
+Delhi,Dwarka,1,42127,210635,806,Semi,Bachelor,84254,2591,14,Yes,No,10.19,2.9,3.22,2.95,2.17,40
+Delhi,Karol Bagh,1,46846,234230,618,semi,Family,93692,2769,8,Yes,Yes,1.7,6.35,5.64,1.79,0.72,89
+Delhi,Karol Bagh,1,57220,228880,1000,Furnished,Bachelor,171660,1914,1,Yes,Yes,4.89,4.27,4.81,3.14,2.99,23
+Delhi,Karol Bagh,3,28334,113336,710,Semi,Bachelor,85002,1777,0,Yes,Yes,9.61,5.65,5.99,0.32,2.93,62
+Delhi,Karol Bagh,1,47576,237880,1374,Semi,Family,142728,1629,8,Yes,Yes,1.97,4.53,2.17,4.37,1.97,57
+Delhi,Lajpat Nagar,1,54374,217496,1109,semi,Family,163122,2149,0,Yes,Yes,2.91,3.16,4.63,4.87,0.64,78
+Delhi,Lajpat Nagar,1,56637,283185,975,Unfurnished,Bachelor,113274,3669,7,Yes,Yes,8.72,9.5,2.47,4.85,2.06,71
+Delhi,Lajpat Nagar,2,39562,197810,906,Unfurnished,Bachelor,79124,2333,17,No,Yes,8.7,7.71,2.93,3.77,0.26,75
+Delhi,Lajpat Nagar,2,23071,115355,827,Unfurnished,Bachelor,46142,1637,7,No,Yes,7.77,1.66,3.8,0.74,0.14,73
+Bangalore,Whitefield,3,35047,70094,1021,Semi,Bachelor,105141,2084,4,Yes,Yes,8.39,8.72,5.25,3.82,0.81,79
+Bangalore,Whitefield,2,56141,168423,1444,semi,Family,168423,3037,8,Yes,Yes,6.6,5.03,5.91,0.22,1.41,72
+Bangalore,Whitefield,2,19866,99330,1217,semi,Bachelor,39732,509,5,Yes,Yes,3.17,8.98,4.63,0.21,2.61,82
+Bangalore,Whitefield,2,27463,109852,986,Furnished,Family,54926,1155,6,No,Yes,4.28,8.06,2.56,1.69,2.2,42
+Bangalore,Indiranagar,1,30385,151925,673,Furnished,Bachelor,60770,1091,17,Yes,Yes,2.34,4.42,2.59,2.49,2.24,50
+Bangalore,Indiranagar,3,49393,246965,825,Semi,Bachelor,98786,1711,4,Yes,No,10.92,0.52,4.45,3.87,1.31,57
+Bangalore,Indiranagar,1,24852,74556,892,Furnished,Bachelor,74556,1948,18,No,No,7.08,2.91,1.51,3.45,1.07,22
+Bangalore,Indiranagar,3,46983,187932,564,Furnished,Family,140949,2048,15,No,No,4.93,5.55,0.75,2.28,1.14,82
+Bangalore,Electronic City,2,35167,105501,894,Furnished,Bachelor,105501,2586,2,No,No,5.65,6.44,2.19,1.44,2.96,86
+Bangalore,Electronic City,2,48940,244700,919,semi,Family,97880,2832,0,Yes,Yes,11.38,2.8,1.79,4.99,0.17,40
+Bangalore,Electronic City,1,30156,120624,1260,semi,Bachelor,60312,2041,1,Yes,Yes,2.01,1.65,1.85,2.19,2.61,84
+Bangalore,Electronic City,2,11423,57115,1085,Unfurnished,Family,34269,573,0,Yes,Yes,7.12,8.4,1.48,2.31,1.76,77
+Bangalore,BTM,2,13966,55864,1596,Semi,Bachelor,41898,763,0,No,No,6.17,9.85,0.35,0.9,1.34,13
+Bangalore,BTM,1,27196,54392,1492,Unfurnished,Bachelor,54392,1348,9,No,No,7.42,5.4,0.21,3.99,2.19,28
+Bangalore,BTM,2,25251,126255,1078,Furnished,Family,75753,801,0,Yes,Yes,0.41,1.97,5.93,3.5,1.49,79
+Bangalore,BTM,1,54565,218260,835,Furnished,Family,109130,3457,3,Yes,Yes,10.49,2.94,2.62,1.18,2.63,22
+Bangalore,Yelahanka,1,19697,59091,1592,Furnished,Bachelor,39394,726,13,Yes,Yes,11.2,0.48,2.37,0.5,2.71,32
+Bangalore,Yelahanka,1,55304,276520,1384,Furnished,Family,110608,1187,0,No,Yes,6.87,9.17,4.11,3.43,1.29,84
+Bangalore,Yelahanka,2,57546,287730,580,semi,Bachelor,115092,3380,12,No,No,8.42,1.44,1.39,3.31,0.87,10
+Bangalore,Yelahanka,1,31034,62068,629,Furnished,Family,62068,950,3,Yes,No,11.09,5.89,5.7,1.44,1.8,63
+Chennai,OMR,1,25720,51440,1356,Semi,Family,51440,1966,1,Yes,Yes,8.55,2.96,4.74,4.76,2.74,80
+Chennai,OMR,3,54944,274720,1501,Semi,Family,164832,4244,9,Yes,No,2.0,5.68,0.63,0.84,0.67,24
+Chennai,OMR,2,34519,138076,724,semi,Family,69038,2585,8,No,No,7.0,6.62,2.56,2.22,1.89,74
+Chennai,OMR,1,18036,72144,1325,Furnished,Bachelor,36072,761,14,No,Yes,7.36,8.35,5.29,4.72,1.91,85
+Chennai,Adyar,1,46322,231610,1472,Semi,Family,138966,969,10,No,Yes,5.2,2.3,5.67,2.16,2.21,80
+Chennai,Adyar,3,31036,93108,1059,Semi,Family,62072,2349,12,Yes,Yes,8.89,0.41,2.86,3.23,0.44,24
+Chennai,Adyar,3,11344,45376,1442,semi,Bachelor,22688,518,3,Yes,Yes,11.23,1.63,3.72,2.05,2.16,30
+Chennai,Adyar,2,21858,87432,1481,Semi,Family,65574,1705,1,Yes,Yes,11.12,9.03,1.09,1.44,2.73,28
+Chennai,Velachery,3,45862,91724,1066,semi,Bachelor,91724,3569,11,Yes,Yes,5.52,8.78,5.95,4.92,0.58,69
+Chennai,Velachery,1,44106,88212,1378,Unfurnished,Family,88212,3139,12,No,Yes,1.54,6.09,1.47,2.11,0.75,42
+Chennai,Velachery,3,25874,51748,1482,Semi,Bachelor,51748,975,20,No,Yes,11.82,6.13,5.66,4.48,2.92,58
+Chennai,Velachery,3,37331,111993,1225,Unfurnished,Family,74662,1609,4,No,No,10.1,6.75,3.93,1.23,0.58,44
+Chennai,T Nagar,3,42586,170344,1010,Semi,Bachelor,127758,3027,4,No,Yes,1.67,2.0,3.69,1.14,2.57,53
+Chennai,T Nagar,2,11712,46848,887,Semi,Bachelor,35136,500,11,Yes,Yes,11.07,9.17,3.12,0.25,1.5,20
+Chennai,T Nagar,1,23124,69372,1371,semi,Family,69372,698,3,No,Yes,10.46,4.36,1.46,3.29,0.78,81
+Chennai,T Nagar,3,46599,139797,959,Furnished,Family,139797,2489,17,No,No,6.32,4.02,1.14,1.91,2.62,87
+Chennai,Anna Nagar,2,36443,182215,528,Furnished,Bachelor,109329,2776,14,No,Yes,7.18,5.33,1.4,4.34,1.36,83
+Chennai,Anna Nagar,1,57429,287145,776,semi,Bachelor,114858,3547,5,Yes,Yes,4.91,0.76,1.2,2.42,1.57,75
+Chennai,Anna Nagar,3,37993,151972,1593,Semi,Bachelor,113979,2059,11,Yes,No,0.85,1.91,4.7,4.84,1.11,55
+Chennai,Anna Nagar,1,17866,71464,1442,semi,Family,35732,500,11,Yes,No,4.16,7.46,2.17,1.01,1.8,18
+Hyderabad,Gachibowli,2,32868,131472,1387,Unfurnished,Bachelor,98604,1870,1,No,No,9.67,1.1,0.44,4.36,0.53,12
+Hyderabad,Gachibowli,3,9128,27384,1018,Furnished,Family,27384,725,15,Yes,Yes,0.25,6.15,5.82,3.91,1.2,35
+Hyderabad,Gachibowli,3,27335,109340,939,semi,Bachelor,54670,776,6,Yes,Yes,4.14,2.68,5.31,3.88,2.91,81
+Hyderabad,Gachibowli,1,31461,94383,1277,Semi,Family,62922,1608,13,Yes,No,4.9,4.08,5.57,4.24,0.81,57
+Hyderabad,Madhapur,3,59032,118064,569,semi,Family,118064,4288,3,Yes,No,6.54,3.1,5.97,3.83,1.99,75
+Hyderabad,Madhapur,2,40115,120345,741,Unfurnished,Bachelor,80230,2585,15,Yes,No,11.05,3.75,1.13,3.17,1.01,79
+Hyderabad,Madhapur,2,59229,296145,1394,Furnished,Family,177687,3662,4,Yes,No,4.29,7.27,2.44,0.74,2.33,37
+Hyderabad,Madhapur,2,32797,131188,1409,semi,Family,98391,2038,0,Yes,Yes,4.29,3.18,4.57,0.26,0.44,35
+Hyderabad,Kondapur,3,40758,203790,917,Furnished,Bachelor,81516,1694,15,Yes,No,8.9,5.79,4.21,4.61,2.91,34
+Hyderabad,Kondapur,3,22543,90172,1225,Unfurnished,Family,45086,848,0,No,Yes,5.54,4.92,1.01,3.12,1.39,21
+Hyderabad,Kondapur,3,43879,175516,1264,Furnished,Family,87758,3008,3,Yes,Yes,2.85,6.74,4.91,4.0,0.75,14
+Hyderabad,Kondapur,1,45440,227200,1203,Semi,Bachelor,90880,3117,18,No,Yes,5.54,9.39,1.42,2.46,0.27,57
+Hyderabad,Begumpet,2,35626,178130,832,semi,Family,71252,2566,18,Yes,Yes,1.86,7.41,1.42,0.67,0.55,46
+Hyderabad,Begumpet,3,35654,71308,595,Furnished,Family,71308,2667,7,Yes,Yes,2.28,2.38,3.27,0.71,1.58,88
+Hyderabad,Begumpet,3,52107,260535,1346,Furnished,Family,156321,2641,8,No,Yes,6.08,0.6,3.6,3.46,1.04,53
+Hyderabad,Begumpet,1,19054,38108,1164,Unfurnished,Family,38108,954,5,Yes,No,5.14,2.84,3.52,2.21,2.5,24
+Hyderabad,Ameerpet,3,14439,28878,1368,Semi,Family,28878,980,3,Yes,Yes,11.0,6.07,0.64,1.08,1.32,52
+Hyderabad,Ameerpet,3,21332,42664,919,Unfurnished,Family,63996,1259,3,Yes,No,4.48,0.8,5.28,2.51,0.78,57
+Hyderabad,Ameerpet,1,56534,113068,1487,semi,Family,113068,3512,9,No,Yes,7.05,5.11,1.67,0.41,1.87,79
+Hyderabad,Ameerpet,1,23979,119895,1535,semi,Bachelor,71937,1625,11,Yes,Yes,7.66,6.09,0.86,2.95,2.13,55

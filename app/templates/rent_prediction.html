@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Prediction | RentWise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+     <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+>
+</head>
+<body>
+   
+     {% include 'components/navbar.html' %}
+    <aside class="profile-sidebar" id="profile-sidebar" aria-hidden="true">
+
+    <div class="profile-sidebar-header">
+
+        <span>Profile</span>
+
+        <button class="profile-close" type="button" aria-label="Close user profile">
+            &times;
+        </button>
+
+    </div>
+
+    <!-- PROFILE CARD -->
+
+    <section class="profile-card">
+
+        <div class="profile-avatar">
+            {{ (session.get('user_name') or 'Renter')[:1] | upper }}
+        </div>
+
+        <div class="profile-content">
+
+            <h2>
+                {{ session.get('user_name') or 'Renter' }}
+            </h2>
+
+            <p>
+                {{ session.get('user_email') or 'Signed in user' }}
+            </p>
+
+            <div class="fit-score-pill">
+                Housing Fit Score - {{ session.get('match_score') or '--' }}%
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PERSONALIZATION -->
+
+    <section class="profile-mini-section">
+
+        <span class="widget-eyebrow">
+            Personalization
+        </span>
+
+        <div class="profile-widget-grid">
+
+            <article>
+
+                <span>Monthly salary</span>
+
+                {% if session.get('user_salary') %}
+                    <strong>
+                        Rs. {{ "{:,.0f}".format(session.get('user_salary')|float) }}
+                    </strong>
+                {% else %}
+                    <strong>--</strong>
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>Healthy rent</span>
+
+                {% if session.get('user_salary') %}
+
+                    <strong>
+                        Rs.
+                        {{ "{:,.0f}".format(session.get('user_salary')|float * 0.25) }}
+                        -
+                        {{ "{:,.0f}".format(session.get('user_salary')|float * 0.35) }}
+                    </strong>
+
+                {% else %}
+
+                    <strong>--</strong>
+
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>City</span>
+
+                <strong>
+                    {{ session.get('user_city') or 'Not set' }}
+                </strong>
+
+            </article>
+
+            <article>
+
+                <span>Style</span>
+
+                {% if personality %}
+                    <strong>{{ personality }}</strong>
+                {% else %}
+                    <strong>Not enough data</strong>
+                {% endif %}
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- FINANCIAL STATUS -->
+
+    <section class="profile-mini-section">
+
+        <span class="widget-eyebrow">
+            Financial Analysis
+        </span>
+
+        <div class="profile-widget-grid">
+
+            <article>
+
+                <span>Status</span>
+
+                {% if financial_label %}
+                    <strong>{{ financial_label }}</strong>
+                {% else %}
+                    <strong>Unavailable</strong>
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>Avg Commute</span>
+
+                {% if session.get('commute_time') %}
+                    <strong>{{ session.get('commute_time') }} mins</strong>
+                {% else %}
+                    <strong>--</strong>
+                {% endif %}
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- PREFERENCE TAGS -->
+
+    <section class="profile-preference-strip">
+
+        {% if badges and badges|length > 0 %}
+
+            {% for badge in badges %}
+
+                <span>{{ badge }}</span>
+
+            {% endfor %}
+
+        {% else %}
+
+            <span>No preferences yet</span>
+
+        {% endif %}
+
+    </section>
+
+    <!-- CONTROLS -->
+
+    <section class="profile-controls">
+
+        <a class="profile-logout" href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </section>
+
+</aside>
+
+<div class="profile-backdrop" hidden></div>
+    <div class="profile-backdrop" hidden></div>
+
+    <main class="prediction-page">
+        <section class="prediction-hero">
+            <div>
+                <p class="eyebrow">Fair rent prediction</p>
+                <h1>Estimate the right rent before you shortlist.</h1>
+                <p>
+                    Enter property details and compare the predicted fair rent with the listed rent.
+                    RentWise can help identify overpriced, underpriced, and fairly priced rentals.
+                </p>
+            </div>
+
+            <div class="prediction-summary-card">
+                <span>Prediction goal</span>
+                <strong>Fair rent + pricing status</strong>
+                <p>Use property, location, convenience, and lifestyle factors to estimate rent.</p>
+            </div>
+        </section>
+
+        <section class="prediction-layout">
+            <form class="prediction-form" action="/rent-prediction" method="post">
+                <div class="form-section-title">
+                    <p class="eyebrow">Property inputs</p>
+                    <h2>Tell us about the listing</h2>
+                </div>
+
+                <div class="prediction-form-grid">
+                    <div>
+                        <label for="city">City</label>
+                        <select id="city" name="city" required>
+                            {% for city in cities | default([]) %}
+                                <option value="{{ city }}" {% if form_data is defined and form_data.city == city %}selected{% endif %}>{{ city }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="area">Area</label>
+                        <select id="area" name="area" required>
+                            <option value="">Select area</option>
+                            {% for area in areas | default([]) %}
+                                <option value="{{ area }}" {% if form_data.area | default('') == area %}selected{% endif %}>{{ area }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="bhk">BHK</label>
+                        <select id="bhk" name="bhk" required>
+                            <option value="1" {% if form_data.bhk | default('') == '1' %}selected{% endif %}>1 BHK</option>
+                            <option value="2" {% if form_data.bhk | default('') == '2' %}selected{% endif %}>2 BHK</option>
+                            <option value="3" {% if form_data.bhk | default('') == '3' %}selected{% endif %}>3 BHK</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="size_sqft">Size</label>
+                        <input id="size_sqft" name="size_sqft" type="number" min="100" step="10" value="{{ form_data.size_sqft | default('') }}" placeholder="950" required>
+                    </div>
+
+                    <div>
+                        <label for="listed_rent">Your Budget</label>
+                        <input id="listed_rent" name="listed_rent" type="number" min="0" step="500" value="{{ form_data.listed_rent | default('') }}" placeholder="25000" required>
+                    </div>
+
+                    <div>
+                        <label for="furnishing">Furnishing</label>
+                        <select id="furnishing" name="furnishing" required>
+                            <option value="Unfurnished" {% if form_data.furnishing | default('') == 'Unfurnished' %}selected{% endif %}>Unfurnished</option>
+                            <option value="Semi" {% if form_data.furnishing | default('') == 'Semi' %}selected{% endif %}>Semi</option>
+                            <option value="Furnished" {% if form_data.furnishing | default('') == 'Furnished' %}selected{% endif %}>Furnished</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="tenant_type">Tenant type</label>
+                        <select id="tenant_type" name="tenant_type" required>
+                            <option value="Family" {% if form_data.tenant_type | default('') == 'Family' %}selected{% endif %}>Family</option>
+                            <option value="Bachelor" {% if form_data.tenant_type | default('') == 'Bachelor' %}selected{% endif %}>Bachelor</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="floor_number">Floor</label>
+                        <input id="floor_number" name="floor_number" type="number" min="0" step="1" value="{{ form_data.floor_number | default('') }}" placeholder="5">
+                    </div>
+
+                    <div>
+                        <label for="parking_available">Parking</label>
+                        <select id="parking_available" name="parking_available">
+                            <option value="Yes" {% if form_data.parking_available | default('') == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No" {% if form_data.parking_available | default('') == 'No' %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="pets_allowed">Pets allowed</label>
+                        <select id="pets_allowed" name="pets_allowed">
+                            <option value="Yes" {% if form_data.pets_allowed | default('') == 'Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No" {% if form_data.pets_allowed | default('') == 'No' %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="maintenance_charges">Maintenance</label>
+                        <input id="maintenance_charges" name="maintenance_charges" type="number" min="0" step="100" value="{{ form_data.maintenance_charges | default('') }}" placeholder="1500">
+                    </div>
+
+                    <div>
+                        <label for="deposit_amount">Deposit</label>
+                        <input id="deposit_amount" name="deposit_amount" type="number" min="0" step="1000" value="{{ form_data.deposit_amount | default('') }}" placeholder="75000">
+                    </div>
+                </div>
+
+                <div class="form-section-title">
+                    <p class="eyebrow">Access and commute</p>
+                    <h2>Nearby convenience</h2>
+                </div>
+
+                <div class="prediction-form-grid compact">
+                    <div>
+                        <label for="nearest_metro_distance_km">Metro distance</label>
+                        <input id="nearest_metro_distance_km" name="nearest_metro_distance_km" type="number" min="0" step="0.1" value="{{ form_data.nearest_metro_distance_km | default('') }}" placeholder="1.5">
+                    </div>
+                    <div>
+                        <label for="nearest_mall_distance_km">Mall distance</label>
+                        <input id="nearest_mall_distance_km" name="nearest_mall_distance_km" type="number" min="0" step="0.1" value="{{ form_data.nearest_mall_distance_km | default('') }}" placeholder="2.0">
+                    </div>
+                    <div>
+                        <label for="nearest_hospital_distance_km">Hospital distance</label>
+                        <input id="nearest_hospital_distance_km" name="nearest_hospital_distance_km" type="number" min="0" step="0.1" value="{{ form_data.nearest_hospital_distance_km | default('') }}" placeholder="1.2">
+                    </div>
+                    <div>
+                        <label for="nearest_school_distance_km">School distance</label>
+                        <input id="nearest_school_distance_km" name="nearest_school_distance_km" type="number" min="0" step="0.1" value="{{ form_data.nearest_school_distance_km | default('') }}" placeholder="0.8">
+                    </div>
+                    <div>
+                        <label for="nearest_park_distance_km">Park distance</label>
+                        <input id="nearest_park_distance_km" name="nearest_park_distance_km" type="number" min="0" step="0.1" value="{{ form_data.nearest_park_distance_km | default('') }}" placeholder="0.6">
+                    </div>
+                    <div>
+                        <label for="avg_commute_time_minutes">Commute time</label>
+                        <input id="avg_commute_time_minutes" name="avg_commute_time_minutes" type="number" min="0" step="1" value="{{ form_data.avg_commute_time_minutes | default('') }}" placeholder="35">
+                    </div>
+                </div>
+
+                <button class="primary-button" type="submit">Predict fair rent</button>
+            </form>
+
+            <aside class="prediction-result" id="prediction-result">
+                <div class="result-card main-result">
+                    <span>Predicted fair rent</span>
+                    <strong>
+                        {% if prediction is defined and prediction.fair_rent is defined %}
+                            Rs. {{ "{:,.0f}".format(prediction.fair_rent) }}
+                        {% else %}
+                            --
+                        {% endif %}
+                    </strong>
+                    <p>Estimated rent based on the property and location details.</p>
+                </div>
+
+                <div class="result-grid">
+                    <div class="result-card">
+                        <span>Area average rent</span>
+                        <strong>
+                            {% if prediction is defined and prediction.area_avg_rent is defined %}
+                                Rs. {{ "{:,.0f}".format(prediction.area_avg_rent) }}
+                            {% else %}
+                                --
+                            {% endif %}
+                        </strong>
+                    </div>
+                    <div class="result-card">
+                        <span>Prediction vs area avg</span>
+                        <strong>
+                            {% if prediction is defined and prediction.difference_percent is defined %}
+                                {% if prediction.difference_percent > 0 %}+{% endif %}{{ prediction.difference_percent }}%
+                            {% else %}
+                                --
+                            {% endif %}
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="result-card negotiation-card">
+                    <span>Market insight</span>
+                    <strong>
+                        {% if prediction is defined and prediction.market_position is defined %}
+                            {{ prediction.market_position }}
+                        {% else %}
+                            --
+                        {% endif %}
+                    </strong>
+                    {% if prediction is defined and prediction.difference_message is defined %}
+                        <p class="difference-message {{ prediction.difference_status | default('near') | lower }}">
+                            {{ prediction.difference_message }}
+                        </p>
+                    {% elif prediction is defined and prediction.difference_percent is defined and prediction.difference_status is defined %}
+                        <p class="difference-message {{ prediction.difference_status | lower }}">
+                            {% if prediction.difference_status == "above" %}
+                                The predicted rent is {{ prediction.difference_percent }}% higher than the average rent in that area.
+                            {% elif prediction.difference_status == "below" %}
+                                The predicted rent is {{ prediction.difference_percent | abs }}% lower than the average rent in that area.
+                            {% else %}
+                                The predicted rent is close to the average rent in that area.
+                            {% endif %}
+                        </p>
+                    {% else %}
+                        <p>Compares the predicted fair rent with the average rent in the selected area.</p>
+                    {% endif %}
+                </div>
+            </aside>
+        </section>
+
+        <section class="prediction-recommendations" id="recommendations">
+            <div class="section-heading">
+                <p class="eyebrow">Personalized recommendations</p>
+                <h2>Listings that best match your inputs.</h2>
+            </div>
+
+            <div class="recommendation-grid">
+                {% for listing in recommended_listings | default([]) %}
+                    <article class="recommendation-card">
+                        <div class="recommendation-media recommendation-media-{{ loop.index0 % 3 }}"></div>
+                        <div class="recommendation-body">
+                            <div class="recommendation-title-row">
+                                <span class="fit-label">{{ listing.tenant_type }}</span>
+                                {% if listing.recommendation_score is defined %}
+                                    <span class="recommendation-score">{{ listing.recommendation_score }}/100</span>
+                                {% endif %}
+                            </div>
+
+                            <h3>{{ listing.bhk }} BHK in {{ listing.area }}</h3>
+                            <p>{{ listing.city }} &middot; {{ listing.furnishing }} &middot; {{ listing.size_sqft }} sqft</p>
+
+                            <dl class="recommendation-metrics">
+                                <div>
+                                    <dt>Rent</dt>
+                                    <dd>Rs. {{ "{:,.0f}".format(listing.rent) }}</dd>
+                                </div>
+                                <div>
+                                    <dt>Affordability</dt>
+                                    <dd>
+                                        {% if listing.affordability_percent is defined %}
+                                            {{ listing.affordability_percent }}%
+                                        {% else %}
+                                            --
+                                        {% endif %}
+                                    </dd>
+                                </div>
+                                <div>
+                                    <dt>Property score</dt>
+                                    <dd>
+                                        {% if listing.property_score is defined %}
+                                            {{ listing.property_score }}/100
+                                        {% else %}
+                                            --
+                                        {% endif %}
+                                    </dd>
+                                </div>
+                                <div>
+                                    <dt>Neighborhood</dt>
+                                    <dd>
+                                        {% if listing.neighborhood_score is defined %}
+                                            {{ listing.neighborhood_score }}/100
+                                        {% else %}
+                                            --
+                                        {% endif %}
+                                    </dd>
+                                </div>
+                            </dl>
+
+                            <a class="listing-detail-button" href="/listing/{{ listing.id | default(loop.index0) }}">View details</a>
+                        </div>
+                    </article>
+                {% else %}
+                    <div class="empty-state recommendation-empty">
+                        <h2>No recommendations yet</h2>
+                        <p>Submit the prediction form to see listings matched around your preferences.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="prediction-support-grid">
+            <article>
+                <h2>Personalized recommendations</h2>
+                <p>Use your selected city, area, BHK, furnishing, tenant type, and budget to surface matching listings.</p>
+            </article>
+            <article>
+                <h2>Similar listings</h2>
+                <p>Use similarity matching to show alternatives close to the selected property profile.</p>
+            </article>
+            <article>
+                <h2>Overpriced detection</h2>
+                <p>Compare listed rent with predicted fair rent to label the property as fair, overpriced, or underpriced.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="dashboard-footer">
+        <div>
+            <strong>RentWise</strong>
+            <span>Prediction tools for confident rental decisions.</span>
+        </div>
+        <span>Estimate fair rent before you commit.</span>
+    </footer>
+    <script src="{{ url_for('static', filename='profile.js') }}"></script>
+</body>
+</html>
+ <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+<script>
+    const cityAreaMap = {{ city_area_map | tojson }};
+    const citySelect = document.querySelector("#city");
+    const areaSelect = document.querySelector("#area");
+
+    function updateAreas() {
+        const selectedCity = citySelect.value;
+        const areas = cityAreaMap[selectedCity] || [];
+
+        areaSelect.innerHTML = '<option value="">Select area</option>';
+
+        areas.forEach((area) => {
+            const option = document.createElement("option");
+            option.value = area;
+            option.textContent = area;
+            areaSelect.appendChild(option);
+        });
+    }
+
+    citySelect.addEventListener("change", updateAreas);
+    updateAreas();
+</script>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentWise | House Rent Analyser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}" aria-label="RentWise home">
+            <span class="brand-mark">R</span>
+            <span style="color: rgb(0, 0, 0);">RentWise</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#how-it-works">How it works</a>
+            <a href="#salary-check">Salary check</a>
+            <a href="#features">Features</a>
+        </nav>
+
+        <div class="header-actions">
+            <a class="login-button" href="{{ url_for('login') }}">Login</a>
+            <a class="signup-button" href="{{ url_for('signup') }}">Sign up</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <p class="eyebrow">House rental analysis for smarter decisions</p>
+                <h1 id="hero-title">Find rental homes that fit your salary.</h1>
+                <p class="hero-copy">
+                    Compare realistic rent ranges, understand affordability, and shortlist
+                    properties without stretching your monthly budget.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="primary-button" href="#salary-check">Check affordability</a>
+                    <a class="secondary-button" href="#how-it-works">Explore process</a>
+                </div>
+            </div>
+
+            <form class="salary-panel" id="salary-check" aria-labelledby="salary-title">
+                <div>
+                    <p class="panel-kicker">Quick salary check</p>
+                    <h2 id="salary-title">Estimate a healthy monthly rent</h2>
+                </div>
+
+                <label for="salary">Monthly salary</label>
+                <div class="input-row">
+                    <span class="currency">Rs.</span>
+                    <input id="salary" name="salary" type="number" min="0" step="1000" value="50000" inputmode="numeric">
+                </div>
+
+                <div class="budget-result" aria-live="polite">
+                    <span>Suggested rent range</span>
+                    <strong id="rent-range">Rs. 12,500 - Rs. 17,500</strong>
+                </div>
+
+                <p class="panel-note">
+                    Based on a comfortable rent target of 25% to 35% of monthly salary.
+                </p>
+            </form>
+        </section>
+
+        <section class="trust-strip" aria-label="Website highlights">
+            <div>
+                <strong>Salary based</strong>
+                <span>Budget-first recommendations</span>
+            </div>
+            <div>
+                <strong>City aware</strong>
+                <span>Compare areas and BHK options</span>
+            </div>
+            <div>
+                <strong>Decision ready</strong>
+                <span>Rent, size, furnishing, and tenant fit</span>
+            </div>
+        </section>
+
+        <section class="section" id="how-it-works">
+            <div class="section-heading">
+                <p class="eyebrow">How it works</p>
+                <h2>From salary to shortlist in three steps</h2>
+            </div>
+
+            <div class="steps-grid">
+                <article>
+                    <span>01</span>
+                    <h3>Enter income</h3>
+                    <p>Share your monthly salary so the analyser can set a practical rent budget.</p>
+                </article>
+                <article>
+                    <span>02</span>
+                    <h3>Compare options</h3>
+                    <p>Review properties by city, area, BHK, furnishing, size, and tenant type.</p>
+                </article>
+                <article>
+                    <span>03</span>
+                    <h3>Choose confidently</h3>
+                    <p>Focus on homes that match your lifestyle without pushing expenses too high.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="feature-band" id="features">
+            <div>
+                <p class="eyebrow">Built for renters</p>
+                <h2>A clearer way to judge whether a home is affordable.</h2>
+            </div>
+
+            <div class="feature-list">
+                <div>
+                    <h3>Rent-to-income view</h3>
+                    <p>See whether a property is comfortable, moderate, or expensive for your salary.</p>
+                </div>
+                <div>
+                    <h3>Area comparison</h3>
+                    <p>Understand how locations differ before spending time on property visits.</p>
+                </div>
+                <div>
+                    <h3>Practical filters</h3>
+                    <p>Use BHK, size, furnishing, and tenant type to narrow the search quickly.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span>RentWise House Rent Analyser</span>
+        <span>Plan rent around income, not guesswork.</span>
+    </footer>
+
+    <script>
+        const salaryInput = document.querySelector("#salary");
+        const rentRange = document.querySelector("#rent-range");
+        const formatter = new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0
+        });
+
+        function updateRentRange() {
+            const salary = Number(salaryInput.value) || 0;
+            const low = salary * 0.25;
+            const high = salary * 0.35;
+            rentRange.textContent = `${formatter.format(low)} - ${formatter.format(high)}`;
+        }
+
+        salaryInput.addEventListener("input", updateRentRange);
+        updateRentRange();
+    </script>
+</body>
+</html>

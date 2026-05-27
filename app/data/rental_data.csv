@@ -1,0 +1,141 @@
+city,area,bhk,rent,avg_income,size_sqft,furnishing,tenant_type
+Ahmedabad,Bopal,2,57785,231140,1350,Unfurnished,Family
+Ahmedabad,Bopal,2,38051,114153,1119,Semi,Family
+Ahmedabad,Bopal,3,57057,171171,1197,semi,Bachelor
+Ahmedabad,Bopal,1,12318,49272,1405,Furnished,Bachelor
+Ahmedabad,Satellite,2,17896,53688,1232,Unfurnished,Bachelor
+Ahmedabad,Satellite,1,34993,174965,683,semi,Bachelor
+Ahmedabad,Satellite,1,32391,129564,933,Unfurnished,Family
+Ahmedabad,Satellite,3,50776,101552,1265,Semi,Family
+Ahmedabad,Chandkheda,3,59125,118250,1095,Unfurnished,Bachelor
+Ahmedabad,Chandkheda,1,36588,109764,951,Furnished,Family
+Ahmedabad,Chandkheda,2,51155,204620,1347,semi,Family
+Ahmedabad,Chandkheda,1,9428,28284,1383,Unfurnished,Family
+Ahmedabad,Vastrapur,1,46799,187196,1092,semi,Family
+Ahmedabad,Vastrapur,3,49901,249505,1004,Unfurnished,Bachelor
+Ahmedabad,Vastrapur,3,18420,55260,595,Furnished,Family
+Ahmedabad,Vastrapur,3,50796,253980,645,Unfurnished,Bachelor
+Ahmedabad,Navrangpura,3,28082,140410,720,semi,Bachelor
+Ahmedabad,Navrangpura,1,56021,224084,1273,Semi,Bachelor
+Ahmedabad,Navrangpura,2,42905,85810,760,Furnished,Family
+Ahmedabad,Navrangpura,3,50756,203024,1313,Furnished,Bachelor
+Mumbai,Andheri,1,31116,124464,1337,Unfurnished,Bachelor
+Mumbai,Andheri,3,53962,215848,1123,Unfurnished,Family
+Mumbai,Andheri,2,31441,94323,816,Furnished,Family
+Mumbai,Andheri,1,43255,173020,1176,Semi,Bachelor
+Mumbai,Bandra,1,59891,119782,1178,semi,Bachelor
+Mumbai,Bandra,2,28560,114240,963,Furnished,Family
+Mumbai,Bandra,3,10096,20192,768,semi,Bachelor
+Mumbai,Bandra,1,11140,44560,1124,Furnished,Family
+Mumbai,Dadar,2,12241,61205,1282,Furnished,Family
+Mumbai,Dadar,2,39598,79196,1506,semi,Family
+Mumbai,Dadar,2,50677,101354,530,semi,Family
+Mumbai,Dadar,2,15153,75765,597,Furnished,Family
+Mumbai,Powai,2,28603,114412,1276,Semi,Bachelor
+Mumbai,Powai,3,24172,96688,720,Furnished,Bachelor
+Mumbai,Powai,3,34854,104562,1340,Furnished,Bachelor
+Mumbai,Powai,1,9729,38916,1308,Furnished,Bachelor
+Mumbai,Borivali,1,43574,130722,1029,semi,Family
+Mumbai,Borivali,1,58445,116890,1278,semi,Family
+Mumbai,Borivali,2,29206,87618,1459,Semi,Family
+Mumbai,Borivali,3,14879,74395,1067,Unfurnished,Family
+Pune,Hinjewadi,1,12730,50920,819,Furnished,Family
+Pune,Hinjewadi,2,55119,275595,1059,semi,Bachelor
+Pune,Hinjewadi,3,8373,33492,564,Semi,Bachelor
+Pune,Hinjewadi,3,27219,108876,1031,Furnished,Bachelor
+Pune,Wakad,3,53441,160323,803,Furnished,Family
+Pune,Wakad,3,14035,28070,1504,Furnished,Family
+Pune,Wakad,2,20132,60396,1021,Unfurnished,Family
+Pune,Wakad,3,26797,53594,721,Unfurnished,Bachelor
+Pune,Kothrud,1,40991,81982,1453,Semi,Bachelor
+Pune,Kothrud,2,54020,108040,670,Unfurnished,Family
+Pune,Kothrud,3,14012,56048,816,Unfurnished,Bachelor
+Pune,Kothrud,3,39849,119547,1509,semi,Family
+Pune,Baner,1,9224,46120,624,semi,Family
+Pune,Baner,2,43287,86574,567,Furnished,Family
+Pune,Baner,2,57814,173442,1382,Unfurnished,Bachelor
+Pune,Baner,2,44240,132720,609,semi,Bachelor
+Pune,Hadapsar,3,24297,121485,744,Semi,Family
+Pune,Hadapsar,1,58025,290125,1042,Unfurnished,Family
+Pune,Hadapsar,3,31104,155520,774,Semi,Family
+Pune,Hadapsar,3,59136,236544,1152,semi,Bachelor
+Delhi,Saket,3,33254,66508,783,Semi,Bachelor
+Delhi,Saket,2,47030,141090,577,Unfurnished,Bachelor
+Delhi,Saket,2,10503,21006,819,semi,Family
+Delhi,Saket,3,44339,177356,739,Furnished,Bachelor
+Delhi,Rohini,3,57314,286570,793,Furnished,Bachelor
+Delhi,Rohini,2,55973,279865,1131,Furnished,Bachelor
+Delhi,Rohini,1,57661,172983,1378,Furnished,Bachelor
+Delhi,Rohini,2,47846,95692,1492,Unfurnished,Family
+Delhi,Dwarka,1,10548,52740,1041,semi,Family
+Delhi,Dwarka,1,36318,108954,737,Semi,Bachelor
+Delhi,Dwarka,3,59179,295895,892,semi,Family
+Delhi,Dwarka,1,42127,210635,806,Semi,Bachelor
+Delhi,Karol Bagh,1,46846,234230,618,semi,Family
+Delhi,Karol Bagh,1,57220,228880,1000,Furnished,Bachelor
+Delhi,Karol Bagh,3,28334,113336,710,Semi,Bachelor
+Delhi,Karol Bagh,1,47576,237880,1374,Semi,Family
+Delhi,Lajpat Nagar,1,54374,217496,1109,semi,Family
+Delhi,Lajpat Nagar,1,56637,283185,975,Unfurnished,Bachelor
+Delhi,Lajpat Nagar,2,39562,197810,906,Unfurnished,Bachelor
+Delhi,Lajpat Nagar,2,23071,115355,827,Unfurnished,Bachelor
+Bangalore,Whitefield,3,35047,70094,1021,Semi,Bachelor
+Bangalore,Whitefield,2,56141,168423,1444,semi,Family
+Bangalore,Whitefield,2,19866,99330,1217,semi,Bachelor
+Bangalore,Whitefield,2,27463,109852,986,Furnished,Family
+Bangalore,Indiranagar,1,30385,151925,673,Furnished,Bachelor
+Bangalore,Indiranagar,3,49393,246965,825,Semi,Bachelor
+Bangalore,Indiranagar,1,24852,74556,892,Furnished,Bachelor
+Bangalore,Indiranagar,3,46983,187932,564,Furnished,Family
+Bangalore,Electronic City,2,35167,105501,894,Furnished,Bachelor
+Bangalore,Electronic City,2,48940,244700,919,semi,Family
+Bangalore,Electronic City,1,30156,120624,1260,semi,Bachelor
+Bangalore,Electronic City,2,11423,57115,1085,Unfurnished,Family
+Bangalore,BTM,2,13966,55864,1596,Semi,Bachelor
+Bangalore,BTM,1,27196,54392,1492,Unfurnished,Bachelor
+Bangalore,BTM,2,25251,126255,1078,Furnished,Family
+Bangalore,BTM,1,54565,218260,835,Furnished,Family
+Bangalore,Yelahanka,1,19697,59091,1592,Furnished,Bachelor
+Bangalore,Yelahanka,1,55304,276520,1384,Furnished,Family
+Bangalore,Yelahanka,2,57546,287730,580,semi,Bachelor
+Bangalore,Yelahanka,1,31034,62068,629,Furnished,Family
+Chennai,OMR,1,25720,51440,1356,Semi,Family
+Chennai,OMR,3,54944,274720,1501,Semi,Family
+Chennai,OMR,2,34519,138076,724,semi,Family
+Chennai,OMR,1,18036,72144,1325,Furnished,Bachelor
+Chennai,Adyar,1,46322,231610,1472,Semi,Family
+Chennai,Adyar,3,31036,93108,1059,Semi,Family
+Chennai,Adyar,3,11344,45376,1442,semi,Bachelor
+Chennai,Adyar,2,21858,87432,1481,Semi,Family
+Chennai,Velachery,3,45862,91724,1066,semi,Bachelor
+Chennai,Velachery,1,44106,88212,1378,Unfurnished,Family
+Chennai,Velachery,3,25874,51748,1482,Semi,Bachelor
+Chennai,Velachery,3,37331,111993,1225,Unfurnished,Family
+Chennai,T Nagar,3,42586,170344,1010,Semi,Bachelor
+Chennai,T Nagar,2,11712,46848,887,Semi,Bachelor
+Chennai,T Nagar,1,23124,69372,1371,semi,Family
+Chennai,T Nagar,3,46599,139797,959,Furnished,Family
+Chennai,Anna Nagar,2,36443,182215,528,Furnished,Bachelor
+Chennai,Anna Nagar,1,57429,287145,776,semi,Bachelor
+Chennai,Anna Nagar,3,37993,151972,1593,Semi,Bachelor
+Chennai,Anna Nagar,1,17866,71464,1442,semi,Family
+Hyderabad,Gachibowli,2,32868,131472,1387,Unfurnished,Bachelor
+Hyderabad,Gachibowli,3,9128,27384,1018,Furnished,Family
+Hyderabad,Gachibowli,3,27335,109340,939,semi,Bachelor
+Hyderabad,Gachibowli,1,31461,94383,1277,Semi,Family
+Hyderabad,Madhapur,3,59032,118064,569,semi,Family
+Hyderabad,Madhapur,2,40115,120345,741,Unfurnished,Bachelor
+Hyderabad,Madhapur,2,59229,296145,1394,Furnished,Family
+Hyderabad,Madhapur,2,32797,131188,1409,semi,Family
+Hyderabad,Kondapur,3,40758,203790,917,Furnished,Bachelor
+Hyderabad,Kondapur,3,22543,90172,1225,Unfurnished,Family
+Hyderabad,Kondapur,3,43879,175516,1264,Furnished,Family
+Hyderabad,Kondapur,1,45440,227200,1203,Semi,Bachelor
+Hyderabad,Begumpet,2,35626,178130,832,semi,Family
+Hyderabad,Begumpet,3,35654,71308,595,Furnished,Family
+Hyderabad,Begumpet,3,52107,260535,1346,Furnished,Family
+Hyderabad,Begumpet,1,19054,38108,1164,Unfurnished,Family
+Hyderabad,Ameerpet,3,14439,28878,1368,Semi,Family
+Hyderabad,Ameerpet,3,21332,42664,919,Unfurnished,Family
+Hyderabad,Ameerpet,1,56534,113068,1487,semi,Family
+Hyderabad,Ameerpet,1,23979,119895,1535,semi,Bachelor

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | RentWise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    <aside class="profile-sidebar" id="profile-sidebar" aria-hidden="true">
+
+    <div class="profile-sidebar-header">
+
+        <span>Profile</span>
+
+        <button class="profile-close" type="button" aria-label="Close user profile">
+            &times;
+        </button>
+
+    </div>
+
+    <!-- PROFILE CARD -->
+
+    <section class="profile-card">
+
+        <div class="profile-avatar">
+            {{ (session.get('user_name') or 'Renter')[:1] | upper }}
+        </div>
+
+        <div class="profile-content">
+
+            <h2>
+                {{ session.get('user_name') or 'Renter' }}
+            </h2>
+
+            <p>
+                {{ session.get('user_email') or 'Signed in user' }}
+            </p>
+
+            <div class="fit-score-pill">
+                Housing Fit Score - {{ session.get('match_score') or '--' }}%
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PERSONALIZATION -->
+
+    <section class="profile-mini-section">
+
+        <span class="widget-eyebrow">
+            Personalization
+        </span>
+
+        <div class="profile-widget-grid">
+
+            <article>
+
+                <span>Monthly salary</span>
+
+                {% if session.get('user_salary') %}
+                    <strong>
+                        Rs. {{ "{:,.0f}".format(session.get('user_salary')|float) }}
+                    </strong>
+                {% else %}
+                    <strong>--</strong>
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>Healthy rent</span>
+
+                {% if session.get('user_salary') %}
+
+                    <strong>
+                        Rs.
+                        {{ "{:,.0f}".format(session.get('user_salary')|float * 0.25) }}
+                        -
+                        {{ "{:,.0f}".format(session.get('user_salary')|float * 0.35) }}
+                    </strong>
+
+                {% else %}
+
+                    <strong>--</strong>
+
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>City</span>
+
+                <strong>
+                    {{ session.get('user_city') or 'Not set' }}
+                </strong>
+
+            </article>
+
+            <article>
+
+                <span>Style</span>
+
+                {% if personality %}
+                    <strong>{{ personality }}</strong>
+                {% else %}
+                    <strong>Not enough data</strong>
+                {% endif %}
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- FINANCIAL STATUS -->
+
+    <section class="profile-mini-section">
+
+        <span class="widget-eyebrow">
+            Financial Analysis
+        </span>
+
+        <div class="profile-widget-grid">
+
+            <article>
+
+                <span>Status</span>
+
+                {% if financial_label %}
+                    <strong>{{ financial_label }}</strong>
+                {% else %}
+                    <strong>Unavailable</strong>
+                {% endif %}
+
+            </article>
+
+            <article>
+
+                <span>Avg Commute</span>
+
+                {% if session.get('commute_time') %}
+                    <strong>{{ session.get('commute_time') }} mins</strong>
+                {% else %}
+                    <strong>--</strong>
+                {% endif %}
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- PREFERENCE TAGS -->
+
+    <section class="profile-preference-strip">
+
+        {% if badges and badges|length > 0 %}
+
+            {% for badge in badges %}
+
+                <span>{{ badge }}</span>
+
+            {% endfor %}
+
+        {% else %}
+
+            <span>No preferences yet</span>
+
+        {% endif %}
+
+    </section>
+
+    <!-- CONTROLS -->
+
+    <section class="profile-controls">
+
+        <a class="profile-logout" href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </section>
+
+</aside>
+    <div class="profile-backdrop" hidden></div>
+
+    <main class="dashboard-page">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <section class="flash-area">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endwith %}
+                <section class="welcome-banner">
+
+    <p class="eyebrow">
+        Welcome back
+    </p>
+
+    <h1>
+        {{ session.get('user_name') or 'Renter' }}👋
+    </h1>
+
+</section>
+
+
+        <section class="dashboard-section chart-section" id="rent-overview">
+            <div class="chart-header">
+                <div class="section-heading">
+                    <p class="eyebrow">Rent overview</p>
+                    <h2>Average rent by area in {{ selected_city }}</h2>
+                </div>
+
+                <form class="city-filter" action="{{ url_for('dashboard') }}" method="post">
+                    <label for="chart-city">Select city</label>
+                    <select id="chart-city" name="city" onchange="this.form.submit()">
+                        {% for city in cities %}
+                            <option value="{{ city }}" {% if city == selected_city %}selected{% endif %}>{{ city }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+
+            <div class="chart-card">
+                <canvas id="areaRentChart" aria-label="Line chart showing average rent by area"></canvas>
+            </div>
+
+            <form class="kpi-filter" action="{{ url_for('dashboard') }}" method="post">
+                <input type="hidden" name="city" value="{{ selected_city }}">
+
+                <div>
+                    <label for="filter-area">Area</label>
+                    <select id="filter-area" name="area">
+                        <option value="">All areas</option>
+                        {% for area in filter_options.areas | default([]) %}
+                            <option value="{{ area }}" {% if filters is defined and filters.area == area %}selected{% endif %}>{{ area }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-bhk">BHK</label>
+                    <select id="filter-bhk" name="bhk">
+                        <option value="">All BHK</option>
+                        {% for bhk in filter_options.bhks | default([]) %}
+                            <option value="{{ bhk }}" {% if filters is defined and filters.bhk|string == bhk|string %}selected{% endif %}>{{ bhk }} BHK</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-furnishing">Furnishing</label>
+                    <select id="filter-furnishing" name="furnishing">
+                        <option value="">All furnishing</option>
+                        {% for furnishing in filter_options.furnishings | default([]) %}
+                            <option value="{{ furnishing }}" {% if filters is defined and filters.furnishing == furnishing %}selected{% endif %}>{{ furnishing }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-tenant">Tenant type</label>
+                    <select id="filter-tenant" name="tenant_type">
+                        <option value="">All tenants</option>
+                        {% for tenant_type in filter_options.tenant_types | default([]) %}
+                            <option value="{{ tenant_type }}" {% if filters is defined and filters.tenant_type == tenant_type %}selected{% endif %}>{{ tenant_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="primary-button" type="submit">Apply filters</button>
+                    <a class="secondary-button" href="{{ url_for('dashboard') }}">Reset</a>
+                </div>
+            </form>
+
+            <div class="dashboard-strip" aria-label="City housing summary">
+                <div>
+                    <span>Total listings in {{ selected_city }}</span>
+                    <strong>{{ kpi_data.lc | default("--") }}</strong>
+                </div>
+                <div>
+                    <span>Average rent</span>
+                    <strong>
+                        {% if kpi_data is defined and kpi_data.avg_rent is defined %}
+                            Rs. {{ "{:,.0f}".format(kpi_data.avg_rent) }}
+                        {% else %}
+                            --
+                        {% endif %}
+                    </strong>
+                </div>
+                <div>
+                    <span>Average size</span>
+                    <strong>
+                        {% if kpi_data is defined and kpi_data.avg_size is defined %}
+                            {{ "{:,.0f}".format(kpi_data.avg_size) }} sqft
+                        {% else %}
+                            --
+                        {% endif %}
+                    </strong>
+                </div>
+                <div>
+                    <span>Affordability index</span>
+                    <strong>
+                        {% if kpi_data is defined and kpi_data.affordability_index is defined %}
+                            {{ kpi_data.affordability_index }}%
+                        {% else %}
+                            --
+                        {% endif %}
+                    </strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-section chart-section" id="income-overview">
+            <div class="section-heading">
+                <p class="eyebrow">Income overview</p>
+                <h2>Average income by area in {{ selected_city }}</h2>
+            </div>
+
+            <div class="chart-card">
+                <canvas id="areaIncomeChart" aria-label="Bar chart showing average income by area"></canvas>
+            </div>
+        </section>
+
+        <section class="dashboard-section promo-section">
+            <div class="section-heading">
+                <p class="eyebrow">Why RentWise helps</p>
+                <h2>Turn rental data into a clearer home search.</h2>
+            </div>
+
+            <div class="promo-grid">
+                <article class="promo-card">
+                    <div class="promo-image promo-image-one"></div>
+                    <div class="promo-body">
+                        <h3>Find rent that fits your salary</h3>
+                        <p>Use affordability signals to focus on areas that match your monthly budget.</p>
+                    </div>
+                </article>
+
+                <article class="promo-card">
+                    <div class="promo-image promo-image-two"></div>
+                    <div class="promo-body">
+                        <h3>Compare areas before visiting</h3>
+                        <p>Check rent, size, and income patterns before spending time on property visits.</p>
+                    </div>
+                </article>
+
+                <article class="promo-card">
+                    <div class="promo-image promo-image-three"></div>
+                    <div class="promo-body">
+                        <h3>Shortlist with confidence</h3>
+                        <p>Filter by BHK, furnishing, and tenant type to move from guesswork to real options.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="dashboard-footer">
+        <div>
+            <strong>RentWise</strong>
+            <span>Salary-aware rental analytics for smarter housing decisions.</span>
+        </div>
+        <span>Explore cities, compare areas, and shortlist with confidence.</span>
+    </footer>
+
+    <script src="{{ url_for('static', filename='profile.js') }}"></script>
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+    <script>
+        
+        const chartData = {{ chart_data | tojson }};
+        const incomeChartData = {{ income_chart_data | default({"areas": [], "avg_income": []}) | tojson }};
+        const chartCanvas = document.querySelector("#areaRentChart");
+        const incomeChartCanvas = document.querySelector("#areaIncomeChart");
+
+        new Chart(chartCanvas, {
+            type: "line",
+            data: {
+                labels: chartData.areas,
+                datasets: [
+                    {
+                        label: "Average rent",
+                        data: chartData.avg_rents,
+                        borderColor: "#1e6f5c",
+                        backgroundColor: "rgba(30, 111, 92, 0.12)",
+                        fill: true,
+                        tension: 0.35,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return "Average rent: Rs. " + context.parsed.y.toLocaleString("en-IN");
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            maxRotation: 55,
+                            minRotation: 35
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return "Rs. " + value.toLocaleString("en-IN");
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(incomeChartCanvas, {
+            type: "bar",
+            data: {
+                labels: incomeChartData.areas,
+                datasets: [
+                    {
+                        label: "Average income",
+                        data: incomeChartData.avg_income,
+                        backgroundColor: "#2f5f8f",
+                        borderColor: "#244c73",
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return "Average income: Rs. " + context.parsed.y.toLocaleString("en-IN");
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            maxRotation: 55,
+                            minRotation: 35
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return "Rs. " + value.toLocaleString("en-IN");
+                            }
+                        }
+                    }
+                }
+            }
+        });
+      
+
+
+
+
+    </script>
+</body>
+</html>
