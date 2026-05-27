@@ -8,25 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+>
 </head>
 <body>
-    <header class="site-header">
-        <a class="brand" href="{{ url_for('index') }}" aria-label="RentWise home">
-            <span class="brand-mark">R</span>
-            <span style="color: rgb(0, 0, 0);">RentWise</span>
-        </a>
-
-        <nav class="nav-links" aria-label="Primary navigation">
-            <a href="#how-it-works">How it works</a>
-            <a href="#salary-check">Salary check</a>
-            <a href="#features">Features</a>
-        </nav>
-
-        <div class="header-actions">
-            <a class="login-button" href="{{ url_for('login') }}">Login</a>
-            <a class="signup-button" href="{{ url_for('signup') }}">Sign up</a>
-        </div>
-    </header>
+    {% include 'components/guest_navbar.html' %}
 
     <main>
         <section class="hero" aria-labelledby="hero-title">
@@ -134,7 +122,9 @@
         <span>RentWise House Rent Analyser</span>
         <span>Plan rent around income, not guesswork.</span>
     </footer>
-
+<script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
     <script>
         const salaryInput = document.querySelector("#salary");
         const rentRange = document.querySelector("#rent-range");

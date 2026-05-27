@@ -48,7 +48,40 @@ a {
 .custom-navbar{
     padding:0;
 }
+.mobile-login-btn,
+.mobile-signup-btn{
+    display:none;
+    
+}
 
+@media(max-width:991px){
+
+    .mobile-login-btn,
+    .mobile-signup-btn{
+
+        display:block;
+
+        width:100%;
+
+        padding:12px 16px;
+
+        border-radius:14px;
+
+        background:#1e6f5c;
+
+        color:white !important;
+
+        text-align:center;
+
+        font-weight:600;
+
+        text-decoration:none;
+    }
+      .custom-navbar .navbar-collapse .nav-link{
+        color:white !important;
+    }
+
+}
 .custom-navbar .navbar-toggler{
     border:none;
     box-shadow:none;
@@ -109,7 +142,7 @@ a {
 
         border-radius:20px;
 
-        background:#fffaf5;
+        background:var(--green-dark);
     }
 
     .custom-navbar .navbar-nav{
@@ -198,6 +231,7 @@ a {
     color: var(--green-dark);
     background: #fff;
     font-weight: 800;
+    text-decoration: none;
 }
 
 .login-button:hover {
@@ -215,6 +249,7 @@ a {
     color: #fff;
     background: var(--green);
     font-weight: 800;
+    text-decoration: none;
 }
 .password-rules{
     margin-top:12px;
@@ -2313,4 +2348,11 @@ body:has(.dashboard-page) .profile-toggle:hover,
     .score-badge-group {
         flex-direction: column;
     }
+}
+.site-header .nav-link{
+    color:#080808 !important;
+}
+
+.site-header .nav-link:hover{
+    color:#095404 !important;
 }
